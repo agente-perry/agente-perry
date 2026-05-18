@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+  --border: #ffffff;
+  --muted: #333333;
+  --accent: #ffffff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #000000;
+  color: #ffffff;
+  font-family: var(--font-geist-mono), "Courier New", monospace;
+  overflow-x: hidden;
+}
+
+/* ── Scanlines overlay ── */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255,255,255,0.015) 2px,
+    rgba(255,255,255,0.015) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ── Glitch title ── */
+.glitch {
+  position: relative;
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+.glitch::before {
+  animation: glitch-1 3s infinite linear alternate-reverse;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  transform: translate(-2px, 0);
+  opacity: 0.8;
+}
+.glitch::after {
+  animation: glitch-2 2s infinite linear alternate-reverse;
+  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+  transform: translate(2px, 0);
+  opacity: 0.8;
+}
+
+@keyframes glitch-1 {
+  0%   { transform: translate(-2px, 0); opacity: 0.8; }
+  20%  { transform: translate(2px, -1px); opacity: 0.6; }
+  40%  { transform: translate(-1px, 1px); clip-path: polygon(0 10%, 100% 10%, 100% 40%, 0 40%); }
+  60%  { transform: translate(1px, 0); opacity: 0.9; }
+  80%  { transform: translate(-2px, 1px); clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%); }
+  100% { transform: translate(0, 0); opacity: 0.8; }
+}
+
+@keyframes glitch-2 {
+  0%   { transform: translate(2px, 0); opacity: 0.8; }
+  25%  { transform: translate(-2px, 1px); opacity: 0.5; }
+  50%  { transform: translate(1px, -1px); clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%); }
+  75%  { transform: translate(-1px, 0); opacity: 0.9; }
+  100% { transform: translate(2px, 0); opacity: 0.8; }
+}
+
+/* ── Noise flicker ── */
+@keyframes flicker {
+  0%, 97%, 100% { opacity: 1; }
+  98% { opacity: 0.4; }
+  99% { opacity: 0.9; }
+}
+
+.flicker {
+  animation: flicker 6s infinite;
+}
+
+/* ── Blink cursor ── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor::after {
+  content: "_";
+  animation: blink 1s step-end infinite;
+}
+
+/* ── Marquee ── */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-inner {
+  animation: marquee 20s linear infinite;
+  white-space: nowrap;
+}
+
+/* ── Glitch border hover ── */
+@keyframes border-glitch {
+  0%   { border-color: #fff; }
+  25%  { border-color: transparent; }
+  26%  { border-color: #fff; }
+  50%  { border-color: #fff; }
+  75%  { border-color: transparent; }
+  76%  { border-color: #fff; }
+  100% { border-color: #fff; }
+}
+.glitch-border:hover {
+  animation: border-glitch 0.3s steps(1) 1;
+}
+
+/* ── Table rows ── */
+.risk-row:hover {
+  background: #ffffff;
+  color: #000000;
+}
+.risk-row {
+  transition: background 0.05s, color 0.05s;
+  cursor: pointer;
+}
