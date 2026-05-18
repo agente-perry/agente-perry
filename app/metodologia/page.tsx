@@ -17,7 +17,7 @@ const FLAGS = [
     group: "B",
     title: "SOLO OCDS",
     subtitle: "Patrones detectables desde los contratos (72k records)",
-    color: "",
+    color: "bg-white text-black",
     items: [
       { code: "F5", name: "CLIENTE CAUTIVO", cypher: "WHERE c.diversity_clients = 1 AND c.total_contracts >= 5", desc: "Proveedor con ≥5 contratos pero solo 1 entidad compradora." },
       { code: "F6", name: "ENTIDAD CAPTURADA", cypher: "WHERE e.avg_supplier_concentration > 0.8", desc: "Una entidad concentra >80% de su gasto en un único proveedor en un año." },
@@ -33,7 +33,7 @@ const FLAGS = [
     group: "C",
     title: "DOSSIERS TDR",
     subtitle: "Análisis de PDFs de términos de referencia",
-    color: "",
+    color: "bg-white text-black",
     items: [
       { code: "F13", name: "DOSSIER HIGH-RISK", cypher: "WHERE d.risk_level = 'ALTO' AND d.total_score >= 50", desc: "TDR con score ≥50/100 en análisis automático de PDF (reglas + AI)." },
       { code: "F14", name: "FLAGS TDR ESPECÍFICOS", cypher: "MATCH (d)-[:HAS_FLAG]->(f:RiskFlag)", desc: "Flags individuales: LOW_TRACEABILITY_OUTPUT, OBSOLETE_PHYSICAL_FORMAT, OVERLY_SPECIFIC_REQUIREMENTS." },
@@ -43,7 +43,7 @@ const FLAGS = [
     group: "D",
     title: "SUNAT RICO (e-consultaruc)",
     subtitle: "Representantes legales, trabajadores, CIIU, deuda",
-    color: "",
+    color: "bg-white text-black",
     items: [
       { code: "F15", name: "CAPACIDAD CERO", cypher: "WHERE c.max_trabajadores = 0 AND c.total_won_pen > 50000", desc: "Cero trabajadores en todos los meses registrados. Imposible ejecutar contratos." },
       { code: "F16", name: "REPRESENTANTE COMPARTIDO", cypher: "MATCH (p:Person)-[:REPRESENTS]->(c1) AND (p)-[:REPRESENTS]->(c2)", desc: "Mismo representante legal en ≥2 empresas que ganaron contratos de la misma entidad." },
@@ -195,7 +195,7 @@ export default function MetodologiaPage() {
                         <p className="font-black text-sm">{f.name}</p>
                       </div>
                       <p className="text-xs opacity-50 leading-5 mb-3">{f.desc}</p>
-                      <div className="border border-white border-opacity-20 p-2 bg-white bg-opacity-5">
+                      <div className="border border-white/20 p-2 bg-white/5">
                         <p className="text-xs opacity-30 mb-1 tracking-widest">CYPHER DETECTION</p>
                         <code className="text-xs opacity-60 font-mono leading-5 break-all">{f.cypher}</code>
                       </div>

@@ -112,7 +112,7 @@ body::before {
   100% { transform: translateX(-50%); }
 }
 .marquee-inner {
-  animation: marquee 20s linear infinite;
+  animation: marquee 70s linear infinite;
   white-space: nowrap;
 }
 
