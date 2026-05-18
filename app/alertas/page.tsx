@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
@@ -17,9 +17,9 @@ const FLAG_CATALOG: Flag[] = [
   { code: "F5", label: "CLIENTE CAUTIVO", group: "B" },
   { code: "F6", label: "ENTIDAD CAPTURADA", group: "B" },
   { code: "F7", label: "FRACCIONAMIENTO", group: "B" },
-  { code: "F8", label: "RÁFAGA FIN DE AÑO", group: "B" },
-  { code: "F9", label: "CONCENTRACIÓN EXTREMA", group: "B" },
-  { code: "F10", label: "PROVEEDOR MONÓGAMO", group: "B" },
+  { code: "F8", label: "RÃFAGA FIN DE AÃ‘O", group: "B" },
+  { code: "F9", label: "CONCENTRACIÃ“N EXTREMA", group: "B" },
+  { code: "F10", label: "PROVEEDOR MONÃ“GAMO", group: "B" },
   { code: "F11", label: "RUC INCOMPLETO", group: "B" },
   { code: "F12", label: "MONTO OUTLIER", group: "B" },
   { code: "F13", label: "DOSSIER HIGH-RISK", group: "C" },
@@ -31,7 +31,7 @@ const FLAG_CATALOG: Flag[] = [
   { code: "F19", label: "EMPRESA RECIENTE", group: "D" },
 ];
 
-const NAMED_REGIONS = ["LIMA", "LORETO", "CUSCO", "JUNÍN", "AREQUIPA", "PIURA", "LA LIBERTAD"];
+const NAMED_REGIONS = ["LIMA", "LORETO", "CUSCO", "JUNÃN", "AREQUIPA", "PIURA", "LA LIBERTAD"];
 const REGIONS = ["TODAS", ...NAMED_REGIONS, "OTRAS"];
 
 type Case = {
@@ -49,7 +49,7 @@ type Case = {
 
 const EMPTY: Case[] = [];
 
-// kept only as offline fallback — real data comes from /api/alertas
+// kept only as offline fallback â€” real data comes from /api/alertas
 const ALL_CASES_FALLBACK: Case[] = [
   {
     name: "CORPRODI S.A.C.",
@@ -73,7 +73,7 @@ const ALL_CASES_FALLBACK: Case[] = [
     region: "LIMA",
     sector: "OBRAS",
     flags: ["F3", "F17", "F6", "F10"],
-    entities: ["MUNIC. PACHACAMAC", "MUNIC. CHOTA", "MUNIC. RIOJA", "+14 más"],
+    entities: ["MUNIC. PACHACAMAC", "MUNIC. CHOTA", "MUNIC. RIOJA", "+14 mÃ¡s"],
   },
   {
     name: "SERVICIOS DACHI E.I.R.L.",
@@ -85,7 +85,7 @@ const ALL_CASES_FALLBACK: Case[] = [
     region: "LORETO",
     sector: "DEFENSA",
     flags: ["F3", "F17", "F8"],
-    entities: ["FUERZA AÉREA DEL PERÚ", "GOBIERNO REGIONAL LORETO", "MUNIC. MAYNAS"],
+    entities: ["FUERZA AÃ‰REA DEL PERÃš", "GOBIERNO REGIONAL LORETO", "MUNIC. MAYNAS"],
   },
   {
     name: "DAFA MEDIC E.I.R.L.",
@@ -130,7 +130,7 @@ const ALL_CASES_FALLBACK: Case[] = [
     total: 1850000,
     contracts: 3,
     score: 68,
-    region: "JUNÍN",
+    region: "JUNÃN",
     sector: "SERVICIOS",
     flags: ["F3", "F1", "F19"],
     entities: ["MUNICIPALIDAD HUANCAYO"],
@@ -160,7 +160,7 @@ const ALL_CASES_FALLBACK: Case[] = [
     entities: ["GOBIERNO REGIONAL PIURA", "MUNICIPALIDADES"],
   },
   {
-    name: "CONSORCIO VERDE AMAZÓNICO",
+    name: "CONSORCIO VERDE AMAZÃ“NICO",
     ruc: "20589012345",
     workers: 0,
     total: 3900000,
@@ -184,7 +184,7 @@ const ALL_CASES_FALLBACK: Case[] = [
     entities: ["MUNICIPALIDAD TRUJILLO", "GOBIERNO REGIONAL LA LIBERTAD"],
   },
   {
-    name: "PROVEEDOR MÉDICO SELVA E.I.R.L.",
+    name: "PROVEEDOR MÃ‰DICO SELVA E.I.R.L.",
     ruc: "20590123456",
     workers: 0,
     total: 1200000,
@@ -205,7 +205,7 @@ const ALL_CASES_FALLBACK: Case[] = [
     region: "LIMA",
     sector: "OBRAS",
     flags: ["F3", "F1", "F17", "F9"],
-    entities: ["MTC", "PROVÍAS NACIONAL", "MUNICIPALIDAD LIMA"],
+    entities: ["MTC", "PROVÃAS NACIONAL", "MUNICIPALIDAD LIMA"],
   },
   {
     name: "ECORECURSOS ANDINOS E.I.R.L.",
@@ -232,7 +232,7 @@ const ALL_CASES_FALLBACK: Case[] = [
     entities: ["MUNICIPALIDAD CUSCO", "MINCULTURA"],
   },
   {
-    name: "FARMA RURAL DEL PERÚ S.A.C.",
+    name: "FARMA RURAL DEL PERÃš S.A.C.",
     ruc: "20598765432",
     workers: 0,
     total: 5400000,
@@ -250,10 +250,10 @@ const ALL_CASES_FALLBACK: Case[] = [
     total: 3250000,
     contracts: 5,
     score: 77,
-    region: "JUNÍN",
+    region: "JUNÃN",
     sector: "OBRAS",
     flags: ["F3", "F1", "F19", "F2"],
-    entities: ["GOBIERNO REGIONAL JUNÍN", "MUNICIPALIDAD HUANCAYO"],
+    entities: ["GOBIERNO REGIONAL JUNÃN", "MUNICIPALIDAD HUANCAYO"],
   },
   {
     name: "GLOBAL TECH PERUANA S.A.",
@@ -268,7 +268,7 @@ const ALL_CASES_FALLBACK: Case[] = [
     entities: ["PCM", "MINEDU", "RENIEC", "SUNARP"],
   },
   {
-    name: "TRANSPORTES AMAZÓNICOS S.A.C.",
+    name: "TRANSPORTES AMAZÃ“NICOS S.A.C.",
     ruc: "20576543210",
     workers: 1,
     total: 1670000,
@@ -301,19 +301,19 @@ const ALL_CASES_FALLBACK: Case[] = [
     region: "LA LIBERTAD",
     sector: "SALUD",
     flags: ["F3", "F17", "F9", "F18"],
-    entities: ["HOSPITAL VÍCTOR LAZARTE", "DIRESA LA LIBERTAD", "ESSALUD"],
+    entities: ["HOSPITAL VÃCTOR LAZARTE", "DIRESA LA LIBERTAD", "ESSALUD"],
   },
   {
-    name: "CONSULTORES ESTRATÉGICOS E.I.R.L.",
+    name: "CONSULTORES ESTRATÃ‰GICOS E.I.R.L.",
     ruc: "20543210987",
     workers: 1,
     total: 2890000,
     contracts: 6,
     score: 69,
     region: "LIMA",
-    sector: "CONSULTORÍA",
+    sector: "CONSULTORÃA",
     flags: ["F5", "F10", "F19"],
-    entities: ["MINISTERIO DE ECONOMÍA Y FINANZAS"],
+    entities: ["MINISTERIO DE ECONOMÃA Y FINANZAS"],
   },
   {
     name: "AGROPECUARIA SIERRA VERDE S.A.C.",
@@ -337,10 +337,10 @@ const ALL_CASES_FALLBACK: Case[] = [
     region: "LIMA",
     sector: "SEGURIDAD",
     flags: ["F9", "F6", "F8"],
-    entities: ["SUNAFIL", "SUNAT", "INDECOPI", "+3 más"],
+    entities: ["SUNAFIL", "SUNAT", "INDECOPI", "+3 mÃ¡s"],
   },
   {
-    name: "LABORATORIO DIAGNÓSTICO RÁPIDO E.I.R.L.",
+    name: "LABORATORIO DIAGNÃ“STICO RÃPIDO E.I.R.L.",
     ruc: "20510987654",
     workers: 0,
     total: 890000,
@@ -352,7 +352,7 @@ const ALL_CASES_FALLBACK: Case[] = [
     entities: ["DIRESA PIURA", "HOSPITAL SANTA ROSA"],
   },
   {
-    name: "EQUIPOS MÉDICOS DEL PACÍFICO S.A.C.",
+    name: "EQUIPOS MÃ‰DICOS DEL PACÃFICO S.A.C.",
     ruc: "20509876543",
     workers: 2,
     total: 9100000,
@@ -370,10 +370,10 @@ const ALL_CASES_FALLBACK: Case[] = [
     total: 3600000,
     contracts: 9,
     score: 76,
-    region: "JUNÍN",
+    region: "JUNÃN",
     sector: "OBRAS",
     flags: ["F3", "F2", "F16", "F19"],
-    entities: ["MUNICIPALIDAD CHANCHAMAYO", "GOBIERNO REGIONAL JUNÍN"],
+    entities: ["MUNICIPALIDAD CHANCHAMAYO", "GOBIERNO REGIONAL JUNÃN"],
   },
   {
     name: "IMPRESIONES Y PUBLICACIONES DEL ESTADO S.A.C.",
@@ -388,14 +388,14 @@ const ALL_CASES_FALLBACK: Case[] = [
     entities: ["MINEDU", "MUNICIPALIDAD LIMA"],
   },
   {
-    name: "CONSORCIO ENERGÉTICO AMAZÓNICO",
+    name: "CONSORCIO ENERGÃ‰TICO AMAZÃ“NICO",
     ruc: "20476543210",
     workers: 0,
     total: 22400000,
     contracts: 4,
     score: 95,
     region: "LORETO",
-    sector: "ENERGÍA",
+    sector: "ENERGÃA",
     flags: ["F3", "F1", "F12", "F9", "F19"],
     entities: ["MINEM", "ELECTRO ORIENTE", "GOBIERNO REGIONAL LORETO"],
   },
@@ -407,7 +407,7 @@ const ALL_CASES_FALLBACK: Case[] = [
     contracts: 11,
     score: 63,
     region: "AREQUIPA",
-    sector: "EDUCACIÓN",
+    sector: "EDUCACIÃ“N",
     flags: ["F3", "F8", "F4"],
     entities: ["UGEL AREQUIPA", "GOBIERNO REGIONAL AREQUIPA"],
   },
@@ -421,7 +421,7 @@ const ALL_CASES_FALLBACK: Case[] = [
     region: "LIMA",
     sector: "SUMINISTROS",
     flags: ["F16", "F9", "F6", "F17"],
-    entities: ["MIDIS", "PRONABEC", "QALI WARMA", "+4 más"],
+    entities: ["MIDIS", "PRONABEC", "QALI WARMA", "+4 mÃ¡s"],
   },
   {
     name: "VIGILANCIA ANDINA E.I.R.L.",
@@ -436,14 +436,14 @@ const ALL_CASES_FALLBACK: Case[] = [
     entities: ["MUNICIPALIDAD PROVINCIAL PUNO"],
   },
   {
-    name: "HIDROELÉCTRICA SIERRA S.A.C.",
+    name: "HIDROELÃ‰CTRICA SIERRA S.A.C.",
     ruc: "20432109876",
     workers: 2,
     total: 8750000,
     contracts: 5,
     score: 82,
     region: "CUSCO",
-    sector: "ENERGÍA",
+    sector: "ENERGÃA",
     flags: ["F3", "F12", "F18", "F17"],
     entities: ["ELECTRO SUR ESTE", "MINEM", "GOBIERNO REGIONAL CUSCO"],
   },
@@ -529,28 +529,28 @@ export default function AlertasPage() {
   };
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-black text-white font-mono">
 
       {/* Header */}
       <section className="border-b border-white px-6 py-10 md:px-16">
         <div className="max-w-7xl mx-auto">
           <p className="text-xs tracking-[0.4em] opacity-50 mb-3">
-            {loading ? "CARGANDO..." : `SEÑALES DE ALERTA — ${filtered.length} REGISTROS`}
+            {loading ? "CARGANDO..." : `SEÃ‘ALES DE ALERTA â€” ${filtered.length} REGISTROS`}
           </p>
           <h1 className="text-5xl font-black tracking-tighter leading-none flicker">
             ALERTAS DETECTADAS
           </h1>
           {!loading && cases.length > 0 ? (
             <p className="text-sm opacity-60 mt-4 leading-7 max-w-2xl">
-              {cases.length} proveedores presentan patrones estadísticos inusuales,
-              acumulando {fmtMonto(headerStats.totalMonto)} en contratos públicos.{" "}
-              {headerStats.highRisk} superan riesgo crítico (score ≥80).{" "}
-              Patrón más frecuente: {headerStats.topFlag} ({headerStats.topFlagLabel}) — presente en {headerStats.topFlagCount} empresas.
+              {cases.length} proveedores presentan patrones estadÃ­sticos inusuales,
+              acumulando {fmtMonto(headerStats.totalMonto)} en contratos pÃºblicos.{" "}
+              {headerStats.highRisk} superan riesgo crÃ­tico (score â‰¥80).{" "}
+              PatrÃ³n mÃ¡s frecuente: {headerStats.topFlag} ({headerStats.topFlagLabel}) â€” presente en {headerStats.topFlagCount} empresas.
             </p>
           ) : (
             <p className="text-xs opacity-40 mt-3 max-w-xl leading-5">
-              Proveedores con combinaciones estadísticas inusuales. Datos públicos SEACE + SUNAT.
-              No constituye acusación.
+              Proveedores con combinaciones estadÃ­sticas inusuales. Datos pÃºblicos SEACE + SUNAT.
+              No constituye acusaciÃ³n.
             </p>
           )}
         </div>
@@ -562,7 +562,7 @@ export default function AlertasPage() {
 
           {/* Flag filters */}
           <div>
-            <p className="text-xs opacity-40 mb-3 tracking-widest">FILTRAR POR SEÑAL</p>
+            <p className="text-xs opacity-40 mb-3 tracking-widest">FILTRAR POR SEÃ‘AL</p>
             <div className="flex flex-wrap gap-2">
               {FLAG_CATALOG.map((f) => (
                 <button
@@ -574,7 +574,7 @@ export default function AlertasPage() {
                       : "border-white border-opacity-30 opacity-50 hover:opacity-100"
                   }`}
                 >
-                  {f.code} · {f.label}
+                  {f.code} Â· {f.label}
                 </button>
               ))}
               {selectedFlags.length > 0 && (
@@ -582,7 +582,7 @@ export default function AlertasPage() {
                   onClick={() => setSelectedFlags([])}
                   className="text-xs px-2 py-1 border border-white opacity-40 hover:opacity-100"
                 >
-                  LIMPIAR ×
+                  LIMPIAR Ã—
                 </button>
               )}
             </div>
@@ -591,7 +591,7 @@ export default function AlertasPage() {
           {/* Region + score filters */}
           <div className="flex flex-wrap gap-6 items-end">
             <div>
-              <p className="text-xs opacity-40 mb-2 tracking-widest">REGIÓN</p>
+              <p className="text-xs opacity-40 mb-2 tracking-widest">REGIÃ“N</p>
               <div className="flex flex-wrap gap-1">
                 {REGIONS.map((r) => (
                   <button
@@ -609,7 +609,7 @@ export default function AlertasPage() {
               </div>
             </div>
             <div>
-              <p className="text-xs opacity-40 mb-2 tracking-widest">SCORE MÍNIMO: {minScore}</p>
+              <p className="text-xs opacity-40 mb-2 tracking-widest">SCORE MÃNIMO: {minScore}</p>
               <input
                 type="range"
                 min={0}
@@ -634,27 +634,27 @@ export default function AlertasPage() {
               <thead>
                 <tr className="border-b border-white bg-white text-black">
                   <th className="text-left p-4 font-black tracking-widest">PROVEEDOR</th>
-                  <th className="text-center p-4 font-black tracking-widest">REGIÓN</th>
+                  <th className="text-center p-4 font-black tracking-widest">REGIÃ“N</th>
                   <th
                     className="text-right p-4 font-black tracking-widest cursor-pointer hover:opacity-70"
                     onClick={() => toggleSort("total")}
                   >
-                    MONTO {sortBy === "total" ? (sortDir === "desc" ? "↓" : "↑") : "·"}
+                    MONTO {sortBy === "total" ? (sortDir === "desc" ? "â†“" : "â†‘") : "Â·"}
                   </th>
                   <th
                     className="text-right p-4 font-black tracking-widest cursor-pointer hover:opacity-70"
                     onClick={() => toggleSort("contracts")}
                   >
-                    CONTRATOS {sortBy === "contracts" ? (sortDir === "desc" ? "↓" : "↑") : "·"}
+                    CONTRATOS {sortBy === "contracts" ? (sortDir === "desc" ? "â†“" : "â†‘") : "Â·"}
                   </th>
                   <th className="text-right p-4 font-black tracking-widest">TRABAJ.</th>
                   <th
                     className="text-right p-4 font-black tracking-widest cursor-pointer hover:opacity-70"
                     onClick={() => toggleSort("score")}
                   >
-                    SCORE {sortBy === "score" ? (sortDir === "desc" ? "↓" : "↑") : "·"}
+                    SCORE {sortBy === "score" ? (sortDir === "desc" ? "â†“" : "â†‘") : "Â·"}
                   </th>
-                  <th className="p-4 font-black tracking-widest">SEÑALES</th>
+                  <th className="p-4 font-black tracking-widest">SEÃ‘ALES</th>
                   <th className="p-4" />
                 </tr>
               </thead>
@@ -683,7 +683,7 @@ export default function AlertasPage() {
                     >
                       <td className="p-4">
                         <p className="font-bold">{c.name}</p>
-                        <p className="opacity-40 mt-0.5">RUC {c.ruc} · {c.sector}</p>
+                        <p className="opacity-40 mt-0.5">RUC {c.ruc} Â· {c.sector}</p>
                       </td>
                       <td className="p-4 text-center opacity-60">{c.region}</td>
                       <td className="p-4 text-right font-bold">{fmtMonto(c.total)}</td>
@@ -709,7 +709,7 @@ export default function AlertasPage() {
                           onClick={(e) => e.stopPropagation()}
                           className="text-xs border border-white px-2 py-1 hover:bg-white hover:text-black transition-colors opacity-50 hover:opacity-100 whitespace-nowrap"
                         >
-                          VER →
+                          VER â†’
                         </Link>
                       </td>
                     </tr>
@@ -718,34 +718,34 @@ export default function AlertasPage() {
                         <td colSpan={8} className="p-6 bg-white text-black">
                           <p className="text-sm leading-6 mb-5 max-w-3xl opacity-80">
                             Empresa con <strong>{c.workers} trabajador{c.workers !== 1 ? "es" : ""}</strong> registrado{c.workers !== 1 ? "s" : ""} en SUNAT
-                            que acumuló <strong>{fmtMonto(c.total)}</strong> en <strong>{c.contracts}</strong> contratos con {c.entities.length} entidad{c.entities.length !== 1 ? "es" : ""} pública{c.entities.length !== 1 ? "s" : ""} distintas
-                            — incluyendo {c.entities[0]}. {c.flags.length} señal{c.flags.length !== 1 ? "es" : ""} activa{c.flags.length !== 1 ? "s" : ""} detectadas.
+                            que acumulÃ³ <strong>{fmtMonto(c.total)}</strong> en <strong>{c.contracts}</strong> contratos con {c.entities.length} entidad{c.entities.length !== 1 ? "es" : ""} pÃºblica{c.entities.length !== 1 ? "s" : ""} distintas
+                            â€” incluyendo {c.entities[0]}. {c.flags.length} seÃ±al{c.flags.length !== 1 ? "es" : ""} activa{c.flags.length !== 1 ? "s" : ""} detectadas.
                           </p>
                           <div className="grid grid-cols-3 gap-6 text-xs">
                             <div>
                               <p className="opacity-50 mb-2 font-black tracking-widest">ENTIDADES CONTRATANTES</p>
                               {c.entities.map((e, i) => (
-                                <p key={i} className="py-1 border-b border-black border-opacity-10 font-bold">▶ {e}</p>
+                                <p key={i} className="py-1 border-b border-black border-opacity-10 font-bold">â–¶ {e}</p>
                               ))}
                             </div>
                             <div>
-                              <p className="opacity-50 mb-2 font-black tracking-widest">SEÑALES ACTIVAS</p>
+                              <p className="opacity-50 mb-2 font-black tracking-widest">SEÃ‘ALES ACTIVAS</p>
                               {c.flags.map((f) => {
                                 const meta = FLAG_CATALOG.find((fc) => fc.code === f);
                                 const flagDescs: Record<string, string> = {
                                   F1:  `Estado irregular (${c.sector ?? "BAJA"}) con contratos activos registrados`,
                                   F2:  `Domicilio fiscal compartido con otras empresas proveedoras del Estado`,
-                                  F3:  `Máximo ${c.workers} trabajador(es) con ${fmtMonto(c.total)} en contratos`,
-                                  F5:  `${c.contracts} contratos adjudicados por una única entidad`,
-                                  F11: `RUC con formato incorrecto — empresa no verificable`,
-                                  F16: `Representante legal en común con otras empresas del Estado`,
-                                  F17: `Deuda fiscal registrada en SUNAT al momento del análisis`,
-                                  F19: `Empresa de reciente constitución con contratos inmediatos`,
+                                  F3:  `MÃ¡ximo ${c.workers} trabajador(es) con ${fmtMonto(c.total)} en contratos`,
+                                  F5:  `${c.contracts} contratos adjudicados por una Ãºnica entidad`,
+                                  F11: `RUC con formato incorrecto â€” empresa no verificable`,
+                                  F16: `Representante legal en comÃºn con otras empresas del Estado`,
+                                  F17: `Deuda fiscal registrada en SUNAT al momento del anÃ¡lisis`,
+                                  F19: `Empresa de reciente constituciÃ³n con contratos inmediatos`,
                                 };
                                 const desc = flagDescs[f];
                                 return (
                                   <div key={f} className="py-1.5 border-b border-black border-opacity-10">
-                                    <p className="font-bold">⚠ {f} — {meta?.label}</p>
+                                    <p className="font-bold">âš  {f} â€” {meta?.label}</p>
                                     {desc && (
                                       <p className="text-xs opacity-50 mt-0.5 leading-4">{desc}</p>
                                     )}
@@ -759,10 +759,10 @@ export default function AlertasPage() {
                                 href={`/empresa/${c.ruc}`}
                                 className="block w-full text-center border border-black py-2 mb-2 hover:bg-black hover:text-white transition-colors font-bold"
                               >
-                                VER PERFIL COMPLETO →
+                                VER PERFIL COMPLETO â†’
                               </Link>
                               <p className="text-xs opacity-40 leading-5 mt-3">
-                                Indicadores estadísticos automatizados. No conclusión jurídica.
+                                Indicadores estadÃ­sticos automatizados. No conclusiÃ³n jurÃ­dica.
                               </p>
                             </div>
                           </div>
@@ -799,7 +799,7 @@ export default function AlertasPage() {
                 <div className="flex justify-between items-start mb-3">
                   <div>
                     <p className="font-bold text-sm">{c.name}</p>
-                    <p className="text-xs opacity-40">RUC {c.ruc} · {c.region}</p>
+                    <p className="text-xs opacity-40">RUC {c.ruc} Â· {c.region}</p>
                   </div>
                   <span className="border border-white px-2 py-1 text-xs font-black">{c.score}</span>
                 </div>
@@ -814,7 +814,7 @@ export default function AlertasPage() {
                   ))}
                 </div>
                 <Link href={`/empresa/${c.ruc}`} className="text-xs border border-white px-3 py-1 hover:bg-white hover:text-black transition-colors whitespace-nowrap shrink-0">
-                  VER PERFIL →
+                  VER PERFIL â†’
                 </Link>
               </div>
             ))}
@@ -827,11 +827,12 @@ export default function AlertasPage() {
           )}
 
           <p className="text-xs opacity-20 mt-6">
-            {filtered.length} de {cases.length} registros · Señales estadísticas · Datos públicos SEACE/SUNAT
-            {error && <span className="ml-3 text-white opacity-40"> · DB offline — mostrando muestra</span>}
+            {filtered.length} de {cases.length} registros Â· SeÃ±ales estadÃ­sticas Â· Datos pÃºblicos SEACE/SUNAT
+            {error && <span className="ml-3 text-white opacity-40"> Â· DB offline â€” mostrando muestra</span>}
           </p>
         </div>
       </section>
     </main>
   );
 }
+

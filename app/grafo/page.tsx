@@ -425,7 +425,7 @@ export default function GrafoPage() {
   }, [selectedNode]);
 
   return (
-    <main className="flex flex-col" style={{ height: "calc(100vh - 41px)" }}>
+    <main className="flex flex-col bg-black text-white font-mono" style={{ height: "calc(100vh - 41px)" }}>
 
       {/* Toolbar */}
       <div className="border-b border-white px-4 py-3 flex flex-wrap items-center gap-6 shrink-0">

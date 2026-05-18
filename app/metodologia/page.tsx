@@ -72,7 +72,7 @@ const SOURCES = [
 
 export default function MetodologiaPage() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-black text-white font-mono">
 
       {/* Header */}
       <section className="border-b border-white px-6 py-10 md:px-16">

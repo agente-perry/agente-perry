@@ -157,7 +157,7 @@ export default function EmpresaPage({ params }: { params: Promise<{ ruc: string 
 
   if (loading) {
     return (
-      <main className="min-h-screen px-6 py-10 md:px-16">
+      <main className="min-h-screen bg-black text-white font-mono px-6 py-10 md:px-16">
         <div className="max-w-7xl mx-auto">
           <Skeleton className="h-4 w-32 mb-6" />
           <Skeleton className="h-12 w-96 mb-4" />
@@ -172,7 +172,7 @@ export default function EmpresaPage({ params }: { params: Promise<{ ruc: string 
 
   if (error === "Error: not_found" || !data) {
     return (
-      <main className="min-h-screen flex flex-col items-center justify-center gap-6">
+      <main className="min-h-screen bg-black text-white font-mono flex flex-col items-center justify-center gap-6">
         <p className="text-xs opacity-40 tracking-widest">RUC {ruc} — NO ENCONTRADO EN BASE DE DATOS</p>
         <Link href="/alertas" className="text-xs border border-white px-4 py-2 hover:bg-white hover:text-black transition-colors">
           ← VOLVER A ALERTAS
@@ -191,7 +191,7 @@ export default function EmpresaPage({ params }: { params: Promise<{ ruc: string 
   ];
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-black text-white font-mono">
 
       {/* Header */}
       <section className="border-b border-white px-6 py-10 md:px-16">
