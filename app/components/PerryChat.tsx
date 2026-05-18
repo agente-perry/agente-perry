@@ -112,9 +112,35 @@ export default function PerryChat() {
         { role: "assistant", content: data.narrative || "" },
       ].slice(-10);
 
-      // Build graph for this turn
-      if (data.success && data.results?.length >= 1) {
-        const graph = buildGraphFromResults(data.results);
+      // Build graph — prefer graph_records (enriched) over raw results
+      const graphSource = data.graph_records?.length >= 1 ? data.graph_records : data.results;
+      if (data.success && graphSource?.length >= 1) {
+        let graph = buildGraphFromResults(graphSource);
+
+        // Fallback: if nodes exist but no edges, fetch entity connections
+        if (graph.nodes.length >= 1 && graph.edges.length === 0) {
+          try {
+            const rucs = graph.nodes
+              .filter(n => n.type === "Company")
+              .map(n => n.id.slice(2)); // strip "c_" prefix
+            if (rucs.length > 0) {
+              const enrichRes = await fetch(`${BACKEND_URL}/graph-enrich`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ rucs }),
+              });
+              if (enrichRes.ok) {
+                const enrichData = await enrichRes.json();
+                if (enrichData.records?.length > 0) {
+                  graph = buildGraphFromResults([...graphSource, ...enrichData.records]);
+                }
+              }
+            }
+          } catch {
+            // enrichment failed — show nodes-only graph
+          }
+        }
+
         if (graph.nodes.length >= 1) {
           next.push({ type: "graph_toggle", text: "", graph });
         }

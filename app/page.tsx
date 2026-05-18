@@ -94,7 +94,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto w-full flex flex-col flex-1">
 
           {/* Tercio superior — logo + headline + tagline */}
-          <div className="flex flex-col items-center justify-center flex-1 pt-12 pb-6 text-center gap-6">
+          <div className="flex flex-col items-center justify-start flex-1 pt-8 pb-4 text-center gap-6">
             <div className="relative w-40 h-40 md:w-56 md:h-56">
               <Image src="/perry.png" alt="Perry" fill className="object-contain flicker" priority sizes="224px" />
             </div>
@@ -115,8 +115,8 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Tercio inferior — query box pegado al fold */}
-          <div className="pb-0">
+          {/* Tercio inferior — query box con espacio antes del fold */}
+          <div className="mt-auto pb-14">
             <div className="border-2 border-white">
               <div className="flex items-center gap-3 px-4 pt-4 pb-2 border-b border-white border-opacity-20">
                 <span className="text-lg leading-none opacity-60">◈</span>
