@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Nav from "./components/Nav";
+import PerryChat from "./components/PerryChat";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -22,6 +23,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-black text-white">
         <Nav />
         {children}
+        <PerryChat />
       </body>
     </html>
   );

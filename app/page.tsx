@@ -65,8 +65,12 @@ const STATS = [
   { label: "REDES POR REPR. LEGAL COMPARTIDO", value: "35" },
 ];
 
+
+const HERO_DEFAULT = "¿Qué empresas tienen 0 trabajadores y más de S/1 millón en contratos públicos?";
+
 export default function Home() {
   const [selected, setSelected] = useState<number | null>(null);
+  const [heroQuery, setHeroQuery] = useState(HERO_DEFAULT);
 
   return (
     <main className="min-h-screen bg-black text-white font-mono">
@@ -85,52 +89,81 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ── HERO ── */}
-      <section className="border-b border-white px-6 py-10 md:px-16 overflow-hidden">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col md:flex-row gap-0 items-center">
+      {/* ── HERO — pantalla completa ── */}
+      <section className="border-b border-white px-6 md:px-16 flex flex-col" style={{ minHeight: "calc(100vh - 37px)" }}>
+        <div className="max-w-4xl mx-auto w-full flex flex-col flex-1">
 
-            {/* Left — text (takes ~60% on desktop) */}
-            <div className="flex-1 min-w-0 py-6 md:pr-8">
-              <p className="text-xs tracking-widest mb-5 opacity-50 uppercase">
+          {/* Tercio superior — logo + headline + tagline */}
+          <div className="flex flex-col items-center justify-center flex-1 pt-12 pb-6 text-center gap-6">
+            <div className="relative w-40 h-40 md:w-56 md:h-56">
+              <Image src="/perry.png" alt="Perry" fill className="object-contain flicker" priority sizes="224px" />
+            </div>
+
+            <div>
+              <p className="text-xs tracking-[0.3em] opacity-40 uppercase mb-3">
                 P.E.R.R.Y · Procurement Evidence &amp; Risk Recognition System
               </p>
               <h1
-                className="glitch text-6xl md:text-[7rem] font-black tracking-tighter leading-none mb-6 uppercase flicker"
+                className="glitch text-6xl md:text-8xl font-black tracking-tighter leading-none uppercase flicker mb-4"
                 data-text="AGENTE PERRY"
               >
                 AGENTE PERRY
               </h1>
-              <p className="text-base md:text-lg leading-7 font-light mb-3">
-                <span className="font-black border-b-2 border-white">S/23 millones</span> en contratos públicos
-                adjudicados a empresas sin capacidad operativa registrada para ejecutarlos — según los datos analizados.
+              <p className="text-sm md:text-base opacity-60 max-w-xl mx-auto leading-relaxed">
+                ¿A quién le dan los contratos del Estado peruano — y deberían dárselos?
               </p>
-              <p className="text-xs opacity-50 leading-6 mb-7">
-                Las tablas muestran filas. Los grafos muestran conexiones.
-                La corrupción siempre deja rastro en las relaciones — y nosotros las mapeamos.
-              </p>
-              <div className="border border-white px-5 py-4 text-xs leading-6 inline-block">
-                <p className="opacity-40 mb-1 tracking-widest">ESTADO DEL SISTEMA</p>
-                <p className="cursor">CONECTADO A NEO4J AURADB</p>
-                <p>NODOS: 107,195 · RELACIONES: 116,509</p>
-                <p className="opacity-40">ÚLTIMA ACTUALIZACIÓN: 2026-05-17</p>
-              </div>
             </div>
-
-            {/* Right — Perry image (~40% on desktop) */}
-            <div className="shrink-0 flex justify-center md:justify-end items-center">
-              <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-[400px] lg:h-[400px]">
-                <Image
-                  src="/perry.png"
-                  alt="Agente Perry"
-                  fill
-                  className="object-contain flicker"
-                  priority
-                />
-              </div>
-            </div>
-
           </div>
+
+          {/* Tercio inferior — query box pegado al fold */}
+          <div className="pb-0">
+            <div className="border-2 border-white">
+              <div className="flex items-center gap-3 px-4 pt-4 pb-2 border-b border-white border-opacity-20">
+                <span className="text-lg leading-none opacity-60">◈</span>
+                <p className="text-xs font-black tracking-widest">PREGÚNTALE AL KNOWLEDGE GRAPH</p>
+                <span className="ml-auto text-xs opacity-30 hidden md:block">Enter para consultar</span>
+              </div>
+              <textarea
+                value={heroQuery}
+                onChange={(e) => setHeroQuery(e.target.value)}
+                rows={3}
+                autoFocus
+                className="w-full bg-transparent text-white font-mono text-base md:text-lg font-black px-4 py-4 outline-none resize-none leading-7 placeholder:opacity-20"
+                placeholder="¿Qué quieres investigar?"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    if (heroQuery.trim())
+                      window.dispatchEvent(new CustomEvent("perry:query", { detail: { query: heroQuery.trim() } }));
+                  }
+                }}
+              />
+              <div className="flex items-center justify-between gap-3 px-4 py-3 border-t border-white border-opacity-20">
+                <div className="flex flex-wrap gap-2">
+                  {["Empresas con deuda coactiva", "Domicilios compartidos", "0 trabajadores con millones"].map((q) => (
+                    <button
+                      key={q}
+                      onClick={() => setHeroQuery(q)}
+                      className="text-xs border border-white border-opacity-30 px-2 py-1 opacity-50 hover:opacity-100 hover:border-opacity-100 transition-opacity"
+                    >
+                      {q}
+                    </button>
+                  ))}
+                </div>
+                <button
+                  onClick={() => {
+                    if (heroQuery.trim())
+                      window.dispatchEvent(new CustomEvent("perry:query", { detail: { query: heroQuery.trim() } }));
+                  }}
+                  disabled={!heroQuery.trim()}
+                  className="shrink-0 bg-white text-black font-black text-sm px-6 py-2.5 hover:bg-black hover:text-white border-2 border-white transition-all disabled:opacity-20"
+                >
+                  CONSULTAR →
+                </button>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -350,73 +383,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── AGENT PREVIEW ── */}
-      <section className="border-b border-white px-6 py-16 md:px-16">
-        <div className="max-w-6xl mx-auto">
-          <p className="text-xs tracking-[0.4em] opacity-50 mb-8">
-            [03] — PREGÚNTALE A PERRY
-          </p>
-          <div className="grid md:grid-cols-2 gap-0 border border-white">
-            {/* Left */}
-            <div className="border-r border-white p-8">
-              <h2 className="text-3xl font-black leading-tight mb-6">
-                LENGUAJE NATURAL.
-                <br />
-                CYPHER AUTOMÁTICO.
-                <br />
-                GRAFO EN TIEMPO REAL.
-              </h2>
-              <p className="text-sm opacity-60 leading-7 mb-8">
-                Escribe tu pregunta. Perry genera la consulta al Knowledge Graph,
-                la ejecuta y construye la red de conexiones visualmente
-                mientras responde.
-              </p>
-              <div className="flex flex-col gap-2 text-xs">
-                {[
-                  "¿Qué empresas tienen 0 trabajadores y millones en contratos?",
-                  "¿Cuánto dinero fue a empresas con deuda coactiva?",
-                  "¿Hay empresas que comparten representante legal?",
-                  "¿Qué municipalidades concentran más gasto en un proveedor?",
-                ].map((q, i) => (
-                  <div key={i} className="border border-white border-opacity-30 px-3 py-2 opacity-60 hover:opacity-100 hover:border-opacity-100 cursor-pointer transition-opacity">
-                    ▶ &quot;{q}&quot;
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Right - mock terminal */}
-            <div className="p-8 bg-white text-black flex flex-col">
-              <div className="flex items-center gap-2 mb-6 text-xs opacity-50">
-                <span className="w-3 h-3 rounded-full bg-black inline-block" />
-                <span className="w-3 h-3 rounded-full bg-black inline-block" />
-                <span className="w-3 h-3 rounded-full bg-black inline-block" />
-                <span className="ml-2 tracking-widest">PERRY TERMINAL v1.0</span>
-              </div>
-              <div className="flex-1 text-xs leading-6 font-mono">
-                <p className="opacity-40">&gt; INICIALIZANDO SISTEMA...</p>
-                <p className="opacity-40">&gt; CONECTANDO A NEO4J AURADB...</p>
-                <p className="opacity-40">&gt; 107,195 NODOS CARGADOS</p>
-                <p className="mt-4">&gt; CONSULTA: empresas con 0 trabajadores</p>
-                <p className="opacity-60 ml-4">→ GENERANDO CYPHER...</p>
-                <p className="opacity-60 ml-4">→ EJECUTANDO EN GRAFO...</p>
-                <p className="mt-4 font-black">RESULTADO: 2 REGISTROS</p>
-                <p className="opacity-70 ml-4 mt-1">▶ GRUPO HEVIMO S.A.C. — S/9.9M</p>
-                <p className="opacity-70 ml-4">▶ DAFA MEDIC E.I.R.L. — S/886K</p>
-                <p className="mt-4 opacity-40 text-xs">
-                  * Patrones estadísticos. No conclusión jurídica.
-                </p>
-              </div>
-              <div className="mt-6 border-t border-black pt-4">
-                <div className="flex items-center gap-2 text-xs opacity-40">
-                  <span>▶</span>
-                  <span className="cursor">ESCRIBE TU PREGUNTA</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* ── DISCLAIMER ── */}
       <section className="px-6 py-12 md:px-16">

@@ -707,7 +707,7 @@ export default function AlertasPage() {
                         <Link
                           href={`/empresa/${c.ruc}`}
                           onClick={(e) => e.stopPropagation()}
-                          className="text-xs border border-white px-2 py-1 hover:bg-white hover:text-black transition-colors opacity-50 hover:opacity-100"
+                          className="text-xs border border-white px-2 py-1 hover:bg-white hover:text-black transition-colors opacity-50 hover:opacity-100 whitespace-nowrap"
                         >
                           VER →
                         </Link>
@@ -813,7 +813,7 @@ export default function AlertasPage() {
                     <span key={f} className="text-xs border border-white px-1 opacity-60">{f}</span>
                   ))}
                 </div>
-                <Link href={`/empresa/${c.ruc}`} className="text-xs border border-white px-3 py-1 hover:bg-white hover:text-black transition-colors">
+                <Link href={`/empresa/${c.ruc}`} className="text-xs border border-white px-3 py-1 hover:bg-white hover:text-black transition-colors whitespace-nowrap shrink-0">
                   VER PERFIL →
                 </Link>
               </div>
